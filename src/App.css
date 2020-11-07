@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+.weather-text{
+  background-color: greenyellow;
+}
