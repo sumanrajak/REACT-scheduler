@@ -39,7 +39,7 @@ const Scheduler = () => {
     useEffect(() => {
         const fetchdata= async ()=>{
             console.log("running")
-          const {data}= await axios.get('/api/products');
+          const {data}= await axios.get('/api/products'); ///get data
          console.log(data) 
           console.log("running22")
 
@@ -53,8 +53,50 @@ const Scheduler = () => {
 
 
     }, [])
+    const  Eventpost_travel = async(e)=>{
+      
+             console.log("post travel")
+            await axios.post("/message/new",{
+                 "title":e.Subject,
+                     "travel_date":e.StartTime_trav,
+                     "return_date":e.endtime_trav,
+                     "travel_from":e.travel_from,
+                     "travel_to":e.travel_to,
+             }
+                 
+             )
+             
+ };
+ const  Eventpost_cliant = async(e)=>{
+      
+  console.log("post cliant")
+ await axios.post("/message/new",{
+      "title":e.Subject,
+          "travel_date":e.StartTime,
+          "return_date":e.endTime,
+          "travel_from":e.travel_from,
+          "travel_to":e.travel_to,
+  }
+      
+  )
+  
+};
+const  Eventpost_internal = async(e)=>{
+      
+  console.log("post internal")
+ await axios.post("/message/new",{
+      "title":e.Subject,
+          "travel_date":e.startTime,
+          "return_date":e.endTime,
+          "travel_from":e.travel_from,
+          "travel_to":e.travel_to,
+  }
+      
+  )
+  
+};
 
-    
+    // sample data
 
     // const data=[{EndTime: new Date(2020, 11, 15, 12, 30),
     // EndTimezone: null,
@@ -75,8 +117,12 @@ const Scheduler = () => {
     // notes_travel_descscription: "mbnjbjj",
     // reference: "",
     // travel_acompanied: "jbjbj"},]
-    
-    
+     
+    //links
+    // https://xd.adobe.com/view/75fd671b-3f85-4f6a-97f3-b34fde6728a8-20ae/screen/62023db1-e8cd-40f6-9ff0-c265da87bb2b/
+
+
+
     const instance = new Internationalization();
      const editorTemplate=(props) =>{ return (props !== undefined ? <table className="custom-event-editor" style={{ width: '100%', cellpadding: '5' }}><tbody>
      <tr><td className="e-textlabel">Add Title</td><td colSpan={4}>
@@ -85,9 +131,9 @@ const Scheduler = () => {
      <tr><td className="e-textlabel">type</td><td colSpan={4}>
        <DropDownListComponent id="EventType" placeholder='Choose status' data-name="EventType" className="e-field" style={{ width: '100%' }} dataSource={['CLIANT', 'TRAVEL', 'INTERNAL']} value={props.EventType || null}></DropDownListComponent>
      </td></tr>
-     <tr><td className="e-textlabel">From</td><td colSpan={4}>
+     {/* <tr><td className="e-textlabel">From</td><td colSpan={4}>
        <DateTimePickerComponent format='dd/MM/yy hh:mm a' id="StartTime" data-name="StartTime" value={new Date(props.startTime || props.StartTime)} className="e-field"></DateTimePickerComponent>
-     </td></tr>
+     </td></tr> */}
      <tr>
          <td colSpan={10}> 
          <Tabs defaultActiveKey="home"  transition={false} id="noanim-tab-example" style={{    width: "fit-content"}}>
@@ -143,16 +189,18 @@ const Scheduler = () => {
   <Tab eventKey="travel" title="travel">
   <table>
           <tbody>
-          <tr>
-              <td colSpan={4}>
-              <DateTimePickerComponent format='dd/MM/yy hh:mm a' id="StartTime" data-name="StartTime" value={new Date(props.startTime || props.StartTime)} className="e-field"></DateTimePickerComponent>
-              </td>
-         </tr>
-         
-         <tr><td>from</td><td colSpan={4}>  <DateTimePickerComponent format='dd/MM/yy hh:mm a' id="StartTime" data-name="StartTime" value={new Date(props.startTime || props.StartTime)} className="e-field"></DateTimePickerComponent>
+          
+         <tr><td>from</td> <td><DateTimePickerComponent format='dd/MM/yy hh:mm a' id="StartTime_trav" data-name="StartTime_trav" value={new Date(props.startTime_trav || props.startTime_trav)} className="e-field"></DateTimePickerComponent>
+
 </td></tr>
 <tr><td className="e-textlabel">To</td><td colSpan={4}>
-       <DateTimePickerComponent format='dd/MM/yy hh:mm a' id="EndTime" data-name="EndTime" value={new Date(props.endTime || props.EndTime)} className="e-field"></DateTimePickerComponent>
+<DateTimePickerComponent format='dd/MM/yy hh:mm a' id="endtime_trav" data-name="endtime_trav" value={new Date(props.endtime_trav || props.endtime_trav)} className="e-field"></DateTimePickerComponent>
+     </td></tr>
+         <tr><td>from</td> <td><textarea id="travel_from" className="e-field e-input" name="travel_from" cols={50} style={{ width: '100%', height: '10px !important', resize: 'vertical' }}  value={props.travel_from || null}></textarea>
+
+</td></tr>
+<tr><td className="e-textlabel">To</td><td colSpan={4}>
+<textarea id="travel_to" className="e-field e-input" name="travel_to" cols={50} style={{ width: '100%', height: '5px !important', resize: 'vertical' }}  value={props.travel_to || null}></textarea>
      </td></tr>
      <tr><td className="e-textlabel">notes</td><td colSpan={4}>
        <textarea id="notes_travel" className="e-field e-input" name="notes_travel_descscription" rows={3} cols={50} style={{ width: '100%', height: '60px !important', resize: 'vertical' }}  value={props.notes_travel || null}></textarea>
@@ -196,40 +244,6 @@ const Scheduler = () => {
     </tbody></table> : <div></div>);}
 
 
-const getDateHeaderText=(value) =>{
-    return instance.formatDate(value, { skeleton: 'Ed' });
-}
-// const getWeather=(value) =>{
-//     switch (value.getDay()) {
-//         case 0:
-//             return '<div class="weather-text">25°C</div>';
-//         case 1:
-//             return '<div class="weather-text">18°C</div>';
-//         case 2:
-//             return '<div class="weather-text">10°C</div>';
-//         case 3:
-//             return '<div class="weather-text">16°C</div>';
-//         case 4:
-//             return '<div class="weather-text">8°C</div>';
-//         case 5:
-//             return '<div class="weather-text">27°C</div>';
-//         case 6:
-//             return '<div class="weather-text">17°C</div>';
-//         default:
-//             return null;
-//     }
-// }
-// const dateHeaderTemplate=(props)=> {
-//     return (<div><div>{getDateHeaderText(props.date)}</div><div className="date-text" dangerouslySetInnerHTML={{ __html: getWeather(props.date) }}></div></div>);
-// }
-const getTimeString=(value)=> {
-    return this.instance.formatDate(value, { skeleton: 'hm' });
-}
-const eventTemplate=(props)=> {
-    return (<div className="weather-text" style={{ backgroundColor:green }}>
-
-</div>);
-}
 const onEventRendered=(args)=> {
    //checking the event output
 //    console.log(args.data)
@@ -252,8 +266,15 @@ const onActionBegin=(args)=> {
     if (args.requestType === 'eventCreate') { 
       
       const eventData = args.data[0];
+      if(eventData.EventType=="TRAVEL"){
+        Eventpost_travel(eventData);
+      }else if(eventData.EventType=="CLIANT"){
+        Eventpost_cliant(eventData);
+      }else{
+        Eventpost_internal(eventData);
+      }
       console.log("created")
-
+      console.log(eventData.EventType)
       console.log(eventData)
       
       
@@ -273,16 +294,7 @@ const onActionBegin=(args)=> {
             <ScheduleComponent width= '100%' height='650px'
             editorTemplate={editorTemplate.bind(this)} 
             cssClass='e-prev'
-            //dateHeaderTemplate={dateHeaderTemplate.bind(this)}
-          // eventSettings={{
-            //     dataSource:  {
-            //         Id: 1,
-            //         Subject: 'Explosion of Betelgeuse Star',
-            //         StartTime: new Date(2018, 1, 15, 9, 30),
-            //         EndTime: new Date(2018, 1, 15, 11, 0)
-            //     }, template: eventTemplate.bind(this)
-            // }} 
-            eventTemplate = {eventTemplate.bind(this)}
+           
             eventRendered={onEventRendered.bind(this)}
             eventSettings={{ dataSource: data }}
             actionBegin={onActionBegin.bind(this)}>
