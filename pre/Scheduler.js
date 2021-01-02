@@ -42,34 +42,31 @@ const Scheduler = () => {
 
 
     useEffect(() => {
-    //     const fetchdata= async ()=>{
-    //         console.log("running")
-    //       const {data}= await axios.get('/api/products'); ///get data
-    //      console.log(data) 
-    //       console.log("running22")
+        const fetchdata= async ()=>{
+            console.log("running")
+          const {data}= await axios.get('/api/products'); ///get data
+         console.log(data) 
+          console.log("running22")
 
-    //       SetData(data);
+          SetData(data);
          
-    //       /api/products
-    // };
+
+    };
     
-    // fetchdata();
+    fetchdata();
 
 
 
     }, [])
-
-
     const  Eventpost_travel = async(e)=>{
       
              console.log("post travel")
-            await axios.post("/api/travelplan",{
+            await axios.post("/message/new",{
                  "title":e.Subject,
-                     "travel_date":e.EndTime,
+                     "travel_date":e.StartTime_trav,
                      "return_date":e.endtime_trav,
                      "travel_from":e.travel_from,
                      "travel_to":e.travel_to,
-		     "accompanied_by" : [] , 
              }
                  
              )
@@ -78,42 +75,53 @@ const Scheduler = () => {
  const  Eventpost_cliant = async(e)=>{
       
   console.log("post cliant")
- await axios.post("/api/external/",{
-"title" : e.Subject ,
-     "meeting_date" : e.EndTime ,
-        "open_time" : e.StartTime ,
-        "close_time" : e.endtime ,
-        "comp_id" :e.company_name ,
-        "meeting_type" : e.cliant_meeting ,
-	"assigned_to" : [1] ,
-        "contact_id" : e.reference 
+ await axios.post("/message/new",{
+      "title":e.Subject,
+          "travel_date":e.StartTime,
+          "return_date":e.endTime,
+          "travel_from":e.travel_from,
+          "travel_to":e.travel_to,
   }
       
   )
   
 };
 const  Eventpost_internal = async(e)=>{
-      const kuch = {
-        headers : {
-          Authorization : "Token 2e2648b6ae86d707d24842a8b2d869fe47870154eeedb893379ffa966b9a87e6"
-        }
-      }
+      
   console.log("post internal")
- await axios.post("/api/internal/",{
-  "title" : e.Subject,
-  "meeting_date" : e.EndTime,
-     "open_time" : e.StartTime_int ,
-     "close_time" : e.endtime_int ,
-     "meeting_type" :e.internal_meeting ,
-     "agenda" : e.internal_notes
-},
-kuch
+ await axios.post("/message/new",{
+      "title":e.Subject,
+          "travel_date":e.startTime,
+          "return_date":e.endTime,
+          "travel_from":e.travel_from,
+          "travel_to":e.travel_to,
+  }
       
   )
   
 };
 
-   
+    // sample data
+
+    // const data=[{EndTime: new Date(2020, 11, 15, 12, 30),
+    // EndTimezone: null,
+    // EventType: "TRAVEL",
+    // Guid: "082bc393-0c7b-8f0e-b9fc-cd9990d9b209",
+    // Id: 1,
+    // RecurrenceRule: undefined,
+    // StartTime:  new Date(2020, 11, 15, 9, 30),
+    // StartTimezone: null,
+    // Subject: "HII",
+    // cliant_meeting: null,
+    // company_name: null,
+    // contact_persons: null,
+    // cr_associates: null,
+    // internal_meeting: null,
+    // internal_notes: "",
+    // notes: "" ,
+    // notes_travel_descscription: "mbnjbjj",
+    // reference: "",
+    // travel_acompanied: "jbjbj"},]
      
     //links
     // https://xd.adobe.com/view/75fd671b-3f85-4f6a-97f3-b34fde6728a8-20ae/screen/62023db1-e8cd-40f6-9ff0-c265da87bb2b/
@@ -157,11 +165,11 @@ kuch
 </td></tr>
 <tr>
   <td><AccessTimeIcon/></td> 
-  <td><DateTimePickerComponent format=' hh:mm a' id="StartTime" data-name="StartTime"style={{ width: '70%',paddingLeft:"5px"  }}  value={new Date(props.StartTime || props.StartTime_)} className="e-field"></DateTimePickerComponent>
+  <td><DateTimePickerComponent format='dd/MM/yy hh:mm a' id="StartTime" data-name="StartTime"style={{ width: '70%',paddingLeft:"5px"  }}  value={new Date(props.StartTime || props.StartTime_)} className="e-field"></DateTimePickerComponent>
   </td> 
   <td>to</td>
   <td >
-  <DateTimePickerComponent format=' hh:mm a' id="endtime" data-name="endtime" style={{ width: '70%',  }}  value={new Date(props.endtime || props.endtime)} className="e-field"></DateTimePickerComponent>
+  <DateTimePickerComponent format='dd/MM/yy hh:mm a' id="endtime" data-name="endtime" style={{ width: '70%',  }}  value={new Date(props.endtime || props.endtime)} className="e-field"></DateTimePickerComponent>
       </td>
 </tr>
 <tr>
@@ -233,11 +241,11 @@ kuch
           <tbody>
           <tr style={{ paddingLeft: "4em"}}>
   <td><AccessTimeIcon/></td> 
-  <td ><DateTimePickerComponent format=' hh:mm a' id="StartTime_int" data-name="StartTime_int"style={{ width: '70%',paddingLeft:"5px"  }}  value={new Date(props.startTime_int || props.startTime_int)} className="e-field"></DateTimePickerComponent>
+  <td ><DateTimePickerComponent format='dd/MM/yy hh:mm a' id="StartTime_trav" data-name="StartTime_trav"style={{ width: '70%',paddingLeft:"5px"  }}  value={new Date(props.startTime_trav || props.startTime_trav)} className="e-field"></DateTimePickerComponent>
   </td> 
   <td>to</td>
   <td >
-  <DateTimePickerComponent format=' hh:mm a' id="endtime_int" data-name="endtime_int" style={{ width: '70%',  }}  value={new Date(props.endtime_int || props.endtime_int)} className="e-field"></DateTimePickerComponent>
+  <DateTimePickerComponent format='dd/MM/yy hh:mm a' id="endtime_trav" data-name="endtime_trav" style={{ width: '70%',  }}  value={new Date(props.endtime_trav || props.endtime_trav)} className="e-field"></DateTimePickerComponent>
       </td>
 </tr>
         
@@ -260,7 +268,10 @@ kuch
 
 
 const onEventRendered=(args)=> {
-   
+   //checking the event output
+//    console.log(args.data)
+//    console.log("event added");
+   //setting color for different events
    let categoryColor
         if (args.data.EventType == "CLIANT") { 
             categoryColor = 'green'; 
