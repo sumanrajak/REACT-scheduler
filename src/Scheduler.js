@@ -8,6 +8,8 @@ import './App.css';
 import { blue, green } from '@material-ui/core/colors';
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
+import TextField from '@material-ui/core/TextField';
+
 import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
@@ -195,11 +197,22 @@ kuch
           
 <tr style={{ paddingLeft: "4em"}}>
   <td><AccessTimeIcon/></td > 
-  <td colSpan={4} ><DateTimePickerComponent format='dd/MM/yy hh:mm a' id="StartTime_trav" data-name="StartTime_trav"style={{ width: '70%',paddingLeft:"5px"  }}  value={new Date(props.startTime_trav || props.startTime_trav)} className="e-field"></DateTimePickerComponent>
+  <td colSpan={4} >
+  <TextField
+        id="StartTime_trav"
+        name="StartTime_trav"
+        type="date"
+        defaultValue="2017-05-24"
+        value="props.StartTime_trav "
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+    {/* <DateTimePickerComponent format='yyyy/MM/dd' id="StartTime_trav"  value={props.StartTime_trav || null} className="e-field"></DateTimePickerComponent> */}
   </td> 
   <td>to</td>
   <td >
-  <DateTimePickerComponent format='dd/MM/yy hh:mm a' id="endtime_trav" data-name="endtime_trav" style={{ width: '70%',  }}  value={new Date(props.endtime_trav || props.endtime_trav)} className="e-field"></DateTimePickerComponent>
+  <DateTimePickerComponent format='yyyy/MM/dd ' id="endtime_travv"  value="endtime_travv"  className="e-field"></DateTimePickerComponent>
       </td>
 </tr>
 <tr>

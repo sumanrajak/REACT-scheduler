@@ -1,0 +1,129 @@
+.backimg{
+    width: 40px;
+    height: auto;
+}
+.butn{
+    display:inline;
+    background-color:#00ADED ;
+    color:white;
+    margin-top: .1em;
+    width: 15em;
+    height:3em;
+    margin-right: 2.2em;
+  }
+
+th, td {
+    padding: 15px;
+  }
+tr{
+    border: 1px solid #00ADED;  }
+.save{
+    display: flex;
+    justify-content: space-between;
+    padding: 9px;}
+
+    .upermain  {
+        background-color: #00ADED;
+        color: white;
+        text-align: center;
+        font-size: large;
+        height: 2em;
+        border-radius: 7px 7px 7px 7px;
+    }
+
+
+
+.tablemain{
+    background-color: #00ADED;
+    color: white;
+    height: 2em;
+    border-radius: 7px 7px 7px 7px;
+
+}
+   .main {
+        margin-left: 4em;
+        margin-top: 1.5em;
+        background-color: white;
+        box-shadow: 0px 0px 10px #00aded;
+        border-color:#00aded ;
+        width: 90%;
+        border-radius: 6px 6px 0px 0px;
+    }
+    .inp{
+        display: inline-block;
+        border-radius: 20cm;
+        border-color: #00ADED;
+        margin-left:0.8em;
+        height: 33px;
+        font-size: small;
+        width: 50%;
+        text-align: left;
+        margin-top: 1em;
+        margin-right: 1em;
+        margin-left:40px ;
+    }
+    .inp_addess{
+        height: 100px;
+        display: inline-block;
+        border-radius: 10px;
+        border-color: #00ADED;
+        margin-left:0.8em;
+    
+        font-size: small;
+        width: 50%;
+        text-align: left;
+        margin-top: 1em;
+        margin-right: 1em;
+        margin-left:40px ;
+        padding-left:3px ;
+    }
+    
+input:focus {
+    outline:none;
+}
+select:focus {
+    outline:none;
+}
+.title{
+    margin-left: 10px;
+    margin-right: 100px;
+    padding: 2px;
+}
+table{
+    width: 100%;
+    padding: 2px;
+}
+th{
+    padding: 2px;
+}
+    .lowermain{
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+    }
+    .rowf{
+        justify-content: space-around;
+        padding: 20px;
+        text-align: center;
+
+    }
+.right {
+    width: 50%;
+    height: 500px;
+
+}
+ .left{
+    width: 50%;
+    height: 500px;
+
+}
+.companydrop
+{
+  display: inline-block;
+  border-radius: 20cm;
+  border-color: #00ADED;
+  
+  
+ 
+
+}
